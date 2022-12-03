@@ -371,7 +371,6 @@ bool process_record_backlight(uint16_t keycode, keyrecord_t *record)
     {
         backlight_set_key_hit( record->event.key.row, record->event.key.col );
     }
-
     switch(keycode)
     {
         case BR_INC:
@@ -415,6 +414,15 @@ bool process_record_backlight(uint16_t keycode, keyrecord_t *record)
                 backlight_effect_speed_decrease();
             }
             return false;
+            break;
+        default:
+            if (record->event.pressed)
+            {
+                IS31FL3736_mono_set_brightness(55, 255);
+            } else {
+                IS31FL3736_mono_set_brightness(55, 0);
+            }
+            return true;
             break;
     }
 
